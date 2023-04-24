@@ -1,3 +1,13 @@
+### Titanic best working Classifier
+https:/www.kaggle.com/code/sinakhorami/titanic-best-working-classifier
+> #### 1. cut과 qcut
+>* cut: 데이터를 데이터 값을 기준으로 일정하게 자른다.(pd.cut())
+
+![스크린샷 2023-04-24 235628](https://user-images.githubusercontent.com/77867734/234035648-8bf8e9e6-e34e-4deb-8c7b-c5134a1265f3.png)
+>* qcut: 데이터를 나누고싶은 구역에 모두 똑같이 개수가 들어가도록 한다.(pd.qcut())
+
+![스크린샷 2023-04-24 235622](https://user-images.githubusercontent.com/77867734/234035691-3194aec3-d9af-4bc9-b9c3-fc14793895a0.png)
+---
 ### Titanic Top 4% with ensemble modeling
 https://www.kaggle.com/code/yassineghouzam/titanic-top-4-with-ensemble-modeling/notebook
 > #### 1. 데이터셋에서 결측기 인덱스 가져오기
