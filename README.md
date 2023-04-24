@@ -1,16 +1,40 @@
 ### Titanic best working Classifier
-https:/www.kaggle.com/code/sinakhorami/titanic-best-working-classifier
+https://www.kaggle.com/code/sinakhorami/titanic-best-working-classifier
 > #### 1. cut과 qcut
 >* cut: 데이터를 데이터 값을 기준으로 일정하게 자른다.(pd.cut())
-
-![스크린샷 2023-04-24 235628](https://user-images.githubusercontent.com/77867734/234035648-8bf8e9e6-e34e-4deb-8c7b-c5134a1265f3.png)
+>
+> ![스크린샷 2023-04-24 235628](https://user-images.githubusercontent.com/77867734/234035648-8bf8e9e6-e34e-4deb-8c7b-c5134a1265f3.png)
 >* qcut: 데이터를 나누고싶은 구역에 모두 똑같이 개수가 들어가도록 한다.(pd.qcut())
+>
+> ![스크린샷 2023-04-24 235622](https://user-images.githubusercontent.com/77867734/234035691-3194aec3-d9af-4bc9-b9c3-fc14793895a0.png)
+>
+>* https://sosoeasy.tistory.com/344
 
-![스크린샷 2023-04-24 235622](https://user-images.githubusercontent.com/77867734/234035691-3194aec3-d9af-4bc9-b9c3-fc14793895a0.png)
+> #### 2. .group(), 정규 표현
+```python
+import re as re
+def get_title(name):
+    title_search= re.search('([A-Za-z]+)\.', name)
+    # 다른데서는 data.Name.str.extract('([A-Za-z]+)\.') 으로 했다.
+    if title_search:
+        return title_search.group(1)
+        # 만약 호칭이 있다면 group 1에 매칭된 것을 return 하라
+    return ''
+    # 아니라면 아무것도 return 하지 마라
+```
+>* https://dojang.io/mod/page/view.php?id=2437
+
+> ### 3. .crosstab()
+```python
+pd.crosstab(train['Title'], train['Sex'])
+# crosstab: 범주형 데이터 2개를 비교 분석한다.
+```
+![스크린샷 2023-04-25 000313](https://user-images.githubusercontent.com/77867734/234037042-6c9edfec-6a50-4e38-8688-c12c56e20af6.png)
+
 ---
 ### Titanic Top 4% with ensemble modeling
 https://www.kaggle.com/code/yassineghouzam/titanic-top-4-with-ensemble-modeling/notebook
-> #### 1. 데이터셋에서 결측기 인덱스 가져오기
+> #### 1. 데이터셋에서 결측 인덱스 가져오기
 ```python
 index_NaN_age= list(dataset['Age'][dataset['Age'].isnull()].index)
 # dataset['Age'] 여기가 있어야 인덱스 가져오기 가능
