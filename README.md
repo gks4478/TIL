@@ -37,3 +37,10 @@ display(pd.DataFrame(simple_test_dtm.toarray(), columns= vect.get_feature_names_
 >* IDF(Inverse Documnet Frequency): DF와 역수 관계이다.
 >* TF-IDF: 전체 문서에서 자주 나오는 단어의 중요도는 낮다고 판단되고 특정 문서에만 나오는 단어는 중요도가 높다고 판단한다.
 >* https://heytech.tistory.com/337
+
+#### 3. .predict_proba()
+>* 분류 모델에서 클래스별로 확률값을 알려준다
+>* 결과값이 [클래스1, 클래스2] 인데 각각 클래스1에 대한 확률값, 클래스2에 대한 확률값이다.
+
+#### 4. MultinomialNB()
+>* 이산기능(예: 텍스트 분류를 위한 단어 수)이 있는 분류에 적합하다.
