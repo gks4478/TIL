@@ -1,3 +1,55 @@
+## NLP using GloVe Embeddings(99.87% Accuracy)
+#### 1. beatuifulsoup
+```python
+from bs4 import BeautifulSoup
+
+def strip_html(text):
+    soup= BeautifulSoup(text, 'html.parser')
+    # text를 파싱하는데 html.parser를 사용한다.
+    return soup.get_text()
+    # text 파싱한거에서 html의 모든 태그는 제거하고 순수 텍스트만 반환 한다.
+# parser: 문장의 구조 분석, 오류 점검 프로그램
+```
+
+#### 2. wordcloud
+```python
+from wordcloud import WordCloud, STOPWORDS
+
+plt.figure(figsize= (20, 20))
+wc= WordCloud(background_color= 'white', max_words= 100, width= 1600, height= 800, stopwords= STOPWORDS).generate(' '.join(df[df.label== 1].text))
+# max_words: 생성될 최대 단어 수
+# stopwords: stopwords 지정, 안하면 라이브러리에서 제공하는 기본값
+# ''.join(df[df.label== 1].text): 데이터 프레임 df에서 label 값이 1인 행들의 text열
+# join 함수를 이용해서 선택된 text 열의 모든 행을 하나의 문자열로 합친다.
+# generate: join된 문자열로 단어 구름을 생성하고 WordCloud 객체에 저장
+plt.imshow(wc, interpolation= 'bilinear')
+plt.axis('off')
+# 그래프의 축을 끈다.
+plt.show()
+```
+
+### 3. .Tokenizer
+```python
+from keras.preprocessing import text, sequence
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+tokenizer= text.Tokenizer(num_words= max_features)
+# 1. 문장의 단어집합을 생성한다.
+# 2. 각 단어의 고유한 정수 인덱스를 부여한다.
+# 3. 단어집합을 토큰화하고 각 단어에 해당하는 인덱스로 매핑한다
+# 함수이다.
+
+tokenizer.fit_on_texts(x_train)
+# x_train으로 tokenizer 함수를 실행한다.
+
+tokenized_train= tokenizer.texts_to_sequences(x_train)
+# 단어의 인덱스를 정수로 변환한다.
+
+x_train= pad_sequences(tokenized_train, maxlen= maxlen)
+# 시퀀스의 길이를 동일하게 맞춘다.
+# tokenized_train이 maxlen 보다 길면 maxlen에 맞춰서 자른다. 짧으면 0으로 채운다.
+```
+---
 ## Natural Languate Processing (NLP) for Beginners
 #### 1. CountVectorizer
 >* 각 문서에 어떤 단어가 몇 번 등장했는지를 파악할 때 사용한다.
