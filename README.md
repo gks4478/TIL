@@ -1,4 +1,5 @@
 ## NLP using GloVe Embeddings(99.87% Accuracy)
+https://www.kaggle.com/code/madz2000/nlp-using-glove-embeddings-99-87-accuracy
 ### 1. beatuifulsoup
 ```python
 from bs4 import BeautifulSoup
