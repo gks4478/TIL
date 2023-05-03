@@ -1,5 +1,5 @@
 ## NLP using GloVe Embeddings(99.87% Accuracy)
-#### 1. beatuifulsoup
+### 1. beatuifulsoup
 ```python
 from bs4 import BeautifulSoup
 
@@ -11,7 +11,7 @@ def strip_html(text):
 # parser: 문장의 구조 분석, 오류 점검 프로그램
 ```
 
-#### 2. wordcloud
+### 2. wordcloud
 ```python
 from wordcloud import WordCloud, STOPWORDS
 
@@ -49,6 +49,16 @@ x_train= pad_sequences(tokenized_train, maxlen= maxlen)
 # 시퀀스의 길이를 동일하게 맞춘다.
 # tokenized_train이 maxlen 보다 길면 maxlen에 맞춰서 자른다. 짧으면 0으로 채운다.
 ```
+
+### 4. GloVe
+>* LSA, Word2Vec의 장점을 모두 활용한다.
+>* 모든 단어 쌍을 분석해서 단어들 간의 동시 출현 정보를 기반으로 단어 벡터를 학습한다.
+>* 임베딩 된 '중심 단어 벡터와 주변 단어 벡터의 내적'이 전체 코스피에서의 '동시 등장 확률'이 되도록 한다.
+>
+> ![1](https://user-images.githubusercontent.com/77867734/235769801-e5dd633f-e328-4073-9b1c-57984913bb05.png)
+>
+>* https://warm-uk.tistory.com/11
+
 ---
 ## Natural Languate Processing (NLP) for Beginners
 #### 1. CountVectorizer
