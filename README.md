@@ -59,6 +59,17 @@ x_train= pad_sequences(tokenized_train, maxlen= maxlen)
 >
 >* https://warm-uk.tistory.com/11
 
+### 5. Embedding
+```python
+model.add(Embedding(max_features, output_dim= embed_size, weights= [embedding_matrix], 
+                    input_length= maxlen, trainable= False))
+# max_features: 총 단어 개수
+# output_dim: 임베딩 벡터의 크기(임베딩 출력 차원)
+# weights: 미리 학습된 벡터 초기값
+# input_length: 입력 시퀀스 길이
+# trainable: 가중치 학습할지의 여부, False이면 미리 학습된 임베딩 벡터 고정(weights 값 고정)
+```
+
 ---
 ## Natural Languate Processing (NLP) for Beginners
 #### 1. CountVectorizer
