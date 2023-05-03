@@ -68,6 +68,45 @@ model.add(Embedding(max_features, output_dim= embed_size, weights= [embedding_ma
 # weights: 미리 학습된 벡터 초기값
 # input_length: 입력 시퀀스 길이
 # trainable: 가중치 학습할지의 여부, False이면 미리 학습된 임베딩 벡터 고정(weights 값 고정)
+
+model.add(LSTM(units= 128, return_sequences= True, recurrent_dropout= 0.25, dropout= 0.25))
+model.add(LSTM(units= 64, recurrent_dropout= 0.1, dropout= 0.1))
+# LSTM: 일반적으로 처리 작업에 사용된다. 입력 시퀀스를 처리하는 동안 이전 상태를 보존할 수 있으므로 이전 정보가 현재 출력에 반영되어 일부 정보가 손실되지 않는다.
+# units: LSTM의 출력공간의 차원을 나타낸다.
+# return_sequences: recurrent_activation 함수를 계산하기 전에 dropout을 적용하는 비율(과적합 방지에 사용)
+# dropout: 출력에 대한 dropout 비율(일반화 성능을 향상시키기 위해 사용)
+
+model.add(Dense(units= 32, activation= 'relu'))
+# LSTM의 출력을 입력으로 받아 중간 특성을 추출하기 위한 것(이전 LSTM 레이어의 출력을 32차원으로 매핑한다.)
+model.add(Dense(1, activation= 'sigmoid'))
+# 이진 분류 문제이라서 차원은 1이어야 한다.
+
+model.compile(optimizer= keras.optimizers.Adam(lr= 0.01), loss= 'binary_crossentropy', metrics= ['accuracy'])
+# optimizer: 모델의 가중치를 업데이트하는 방법을 결정하는 알고리즘
+# lr: 학습률
+# loss: 손실함수 결정(이진분류는 binary_crossentropy 사용)
+# metrics: 모델이 평가하는 지표 결정
+```
+
+### 6. 콜백callback함수: ReduceLROnPlateau
+```python
+learning_rate_reduction= ReduceLROnPlateau(monitor= 'val_accuracy', patience= 2, varbose= 1,
+                                           factor= 0.5, min_lr= 0.00001)
+# 검증 손실이 개선 되지 않을 때(= patience) 학습률을 동적으로 감소시켜 학습을 더욱 세밀하게 조정한다.
+# monitor: 모니터링할 지표 지정(여기서는 검증 정확도를 설정한다.
+# patience: 검증손실이 2번 연속 개선되지 않으면 학습률을 감소시킨다.
+# factor: 학습률을 감소시킬 비율
+# min_lr: 학습률의 하한구성, 학습률이 min_lr보다 작아지면 더 이상 학습률을 감소시키지 않는다.
+```
+
+### 7. 모델 학습
+```python
+history= model.fit(x_train, y_train, batch_size= batch_size, validation_data= (x_test, y_test), 
+                    epochs= epochs, callbacks= [learning_rate_reduction])
+# batch_size: 한번에 처리할 데이터 샘플 개수
+# validation_data= (x_test, y_test): x_test와 y_test을 튜플 형태로 전달한다.
+# epochs: 학습을 반복할 횟수이다.
+# callbacks: 학습 도중에 사용할 콜백함수 리스트이다.
 ```
 
 ---
