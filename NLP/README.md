@@ -1,4 +1,4 @@
-## NLP using GloVe Embeddings(99.87% Accuracy)
+## 2. NLP using GloVe Embeddings(99.87% Accuracy)
 https://www.kaggle.com/code/madz2000/nlp-using-glove-embeddings-99-87-accuracy
 ### 1. beatuifulsoup
 ```python
@@ -111,7 +111,7 @@ history= model.fit(x_train, y_train, batch_size= batch_size, validation_data= (x
 ```
 
 ---
-## Natural Languate Processing (NLP) for Beginners
+## 1. Natural Languate Processing (NLP) for Beginners
 #### 1. CountVectorizer
 >* 각 문서에 어떤 단어가 몇 번 등장했는지를 파악할 때 사용한다.
 >* 각 단어를 세서 문서를 벡터화 한다.
